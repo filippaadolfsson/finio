@@ -38,7 +38,8 @@ export default function Home() {
         <nav style={{ background: "rgba(245,247,245,0.95)", borderBottom: "1px solid #dde8e2", padding: "18px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, backdropFilter: "blur(12px)" }}>
           <div style={{ fontSize: 22, color: "#0d6e52", letterSpacing: -0.5 }}>finio</div>
           <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-            <span style={{ fontSize: 13, color: "#556b5e", cursor: "pointer", fontFamily: "sans-serif" }}>Mallar</span>
+            <span onClick={() => document.getElementById("mallar")?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: 13, color: "#556b5e", cursor: "pointer", fontFamily: "sans-serif" }}>Mallar</span>
+
             <span onClick={() => document.getElementById("hur-det-fungerar")?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: 13, color: "#556b5e", cursor: "pointer", fontFamily: "sans-serif" }}>Hur det fungerar</span>
 
             <span onClick={() => document.getElementById("priser")?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: 13, color: "#556b5e", cursor: "pointer", fontFamily: "sans-serif" }}>Priser</span>
@@ -244,40 +245,336 @@ export default function Home() {
 
 
         {/* TEMPLATES */}
-        <section style={{ padding: "80px 48px", maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ fontSize: 11, fontWeight: 500, color: "#1a9e74", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, fontFamily: "monospace" }}>Designmallar</div>
-          <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 300, letterSpacing: -1, lineHeight: 1.2, marginBottom: 12, color: "#0c1510" }}>Sex mallar. Samma data.</h2>
-          <p style={{ fontSize: 15, color: "#556b5e", maxWidth: 460, lineHeight: 1.7, marginBottom: 48, fontFamily: "sans-serif", fontWeight: 300 }}>Välj den mall som passar klientens profil. Allt ser professionellt ut – direkt.</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
-            {[
-              { name: "Mörk premium", desc: "Professionell och auktoritativ. Passar investmentbolag och IR-rapporter.", tag: "Populär", tagColor: "#e0f5ee", tagText: "#0d6e52", bg: "#0c1510", accent: "#1a9e74" },
-              { name: "Ljus klassisk", desc: "Ren och lättläst. Passar de flesta bolag och rapporttyper.", bg: "#fff", accent: "#1a9e74" },
-              { name: "Djärv grön", desc: "Stark och igenkänningsbar. Bygger varumärke vid varje rapport.", bg: "#1a9e74", accent: "#fff" },
-              { name: "Minimalistisk", desc: "Typografi och whitespace i fokus. Passar bolag som värdesätter enkelhet.", bg: "#fafafa", accent: "#0c1510" },
-              { name: "Årsredovisning", desc: "Komplett mall med VD-ord, förvaltningsberättelse och noter.", tag: "Nyhet", tagColor: "#e8f0fb", tagText: "#2563a8", bg: "#0c1510", accent: "#5dcaa5" },
-              { name: "IR-rapport", desc: "Investerarrelationer och kapitalmarknadskommunikation med aktiedata.", bg: "#fff", accent: "#2563a8" },
-            ].map((t, i) => (
-              <div key={i} onClick={() => { setView("app"); setStep(2); setSelectedTemplate(i); }} style={{ background: "#fff", border: "1px solid #dde8e2", borderRadius: 16, overflow: "hidden", cursor: "pointer", transition: "transform .2s" }}
-                onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-2px)")}
-                onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}>
-                <div style={{ height: 160, background: t.bg, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 20 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <div style={{ width: 28, height: 28, background: t.accent, borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 600, color: t.bg, fontFamily: "monospace" }}>BK</div>
-                    {t.tag && <span style={{ background: t.tagColor, color: t.tagText, fontSize: 10, padding: "2px 8px", borderRadius: 20, fontWeight: 500, fontFamily: "sans-serif" }}>{t.tag}</span>}
+                {/* TEMPLATES */}
+        <section id="mallar" style={{ padding: "80px 0", background: "#fff" }}>
+
+          {/* Header */}
+          <div style={{ padding: "0 48px", maxWidth: 1100, margin: "0 auto 64px" }}>
+            <div style={{ fontSize: 11, fontWeight: 500, color: "#1a9e74", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, fontFamily: "monospace" }}>Designmallar</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "flex-end" }}>
+              <div>
+                <h2 style={{ fontSize: "clamp(26px,4vw,42px)", fontWeight: 300, letterSpacing: -1, lineHeight: 1.2, marginBottom: 16, color: "#0c1510", fontFamily: "Georgia, serif" }}>
+                  Sex mallar.<br /><em style={{ color: "#0d6e52" }}>Oändliga möjligheter.</em>
+                </h2>
+                <p style={{ fontSize: 15, color: "#556b5e", lineHeight: 1.8, fontFamily: "sans-serif", fontWeight: 300 }}>
+                  Varje mall är byggd för finansiell kommunikation – med rätt struktur för framsida, VD-ord, nyckeltal, diagram och bilagor. Anpassa med era egna färger, loggor och bilder på minuter.
+                </p>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {[
+                  { icon: "⟲", title: "Drag and drop", desc: "Flytta sidor och element fritt. Ingen kod, inga begränsningar." },
+                  { icon: "◈", title: "Egna loggor och bilder", desc: "Ladda upp klientens grafiska profil en gång – den sitter kvar." },
+                  { icon: "◉", title: "Färger och typsnitt", desc: "Matcha exakt varumärkesfärger med hex-kod eller colour picker." },
+                ].map((f, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                    <div style={{ width: 32, height: 32, borderRadius: 8, background: "#e0f5ee", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, flexShrink: 0, color: "#0d6e52" }}>{f.icon}</div>
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: "#0c1510", fontFamily: "sans-serif" }}>{f.title}</div>
+                      <div style={{ fontSize: 13, color: "#556b5e", fontFamily: "sans-serif", fontWeight: 300 }}>{f.desc}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div style={{ fontSize: 20, fontWeight: 300, color: t.accent, letterSpacing: -0.5, lineHeight: 1.1, marginBottom: 4 }}>Kvartals-<br /><em>rapport Q2</em></div>
-                    <div style={{ fontSize: 10, color: t.accent, opacity: 0.5, fontFamily: "monospace" }}>Bergström Kapital AB</div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Template cards – full width scroll */}
+          <div style={{ overflowX: "auto", paddingBottom: 8 }}>
+            <div style={{ display: "flex", gap: 20, padding: "0 48px", width: "max-content" }}>
+
+              {/* Template 1 – Mörk premium */}
+              <div style={{ width: 340, flexShrink: 0 }}>
+                <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #dde8e2", marginBottom: 16 }}>
+                  {/* Cover */}
+                  <div style={{ background: "#0c1510", padding: "28px 24px 0", minHeight: 300, display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative", overflow: "hidden" }}>
+                    <div style={{ position: "absolute", right: -60, top: -60, width: 240, height: 240, borderRadius: "50%", border: "1px solid rgba(255,255,255,.05)" }} />
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <div style={{ width: 28, height: 28, background: "#1a9e74", borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 600, color: "#fff", fontFamily: "monospace" }}>BK</div>
+                        <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)", fontFamily: "Georgia, serif" }}>Bergström Kapital</div>
+                      </div>
+                      <div style={{ background: "rgba(26,158,116,.2)", color: "#5dcaa5", fontSize: 9, padding: "3px 8px", borderRadius: 10, fontFamily: "monospace", border: "1px solid rgba(93,202,165,.2)" }}>Q2 2025</div>
+                    </div>
+                    <div style={{ paddingBottom: 24 }}>
+                      <div style={{ fontSize: 32, fontWeight: 300, color: "#fff", letterSpacing: -1, lineHeight: 1.1, marginBottom: 8, fontFamily: "Georgia, serif" }}>Kvartal<br /><em style={{ color: "#5dcaa5" }}>två, 2025</em></div>
+                      <div style={{ fontSize: 11, color: "rgba(255,255,255,.35)" }}>Finansiell rapport · Januari–Juni</div>
+                    </div>
+                  </div>
+                  {/* KPI bar */}
+                  <div style={{ background: "#1a9e74", padding: "14px 24px", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
+                    {[["Omsättning", "84,2M", "+12%"], ["EBITDA", "18,6M", "+8%"], ["Marginal", "22,1%", "-0,8pp"]].map(([l, v, c], i) => (
+                      <div key={i}>
+                        <div style={{ fontSize: 8, color: "rgba(255,255,255,.6)", fontFamily: "monospace", textTransform: "uppercase", marginBottom: 2 }}>{l}</div>
+                        <div style={{ fontSize: 14, fontWeight: 500, color: "#fff" }}>{v}</div>
+                        <div style={{ fontSize: 9, color: "rgba(255,255,255,.6)", fontFamily: "monospace" }}>{c}</div>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Inner page preview */}
+                  <div style={{ background: "#fff", padding: "16px 24px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
+                      <div style={{ width: 18, height: 18, background: "#1a9e74", borderRadius: 3, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 7, fontWeight: 600, color: "#fff", fontFamily: "monospace" }}>BK</div>
+                      <div style={{ fontSize: 10, color: "#8aa396" }}>Bergström Kapital AB · Q2 2025</div>
+                    </div>
+                    <div style={{ fontSize: 8, color: "#1a9e74", fontFamily: "monospace", textTransform: "uppercase", letterSpacing: .5, marginBottom: 4 }}>Finansiell data</div>
+                    <div style={{ display: "flex", alignItems: "flex-end", gap: 2, height: 40, marginBottom: 8 }}>
+                      {[40, 52, 44, 60, 55, 72].map((h, i) => (
+                        <div key={i} style={{ flex: 1, height: `${h}%`, borderRadius: "1px 1px 0 0", background: i >= 4 ? "#1a9e74" : "#e0f5ee" }} />
+                      ))}
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                      {[["Intäkter", "84 247"], ["Kostnader", "65 626"], ["EBITDA", "18 621"]].map(([l, v], i) => (
+                        <div key={i} style={{ display: "flex", justifyContent: "space-between", fontSize: 9, padding: "3px 0", borderBottom: "1px solid #f5f7f5", fontFamily: "monospace" }}>
+                          <span style={{ color: "#556b5e" }}>{l}</span>
+                          <span style={{ color: "#0c1510", fontWeight: i === 2 ? 500 : 400 }}>{v}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ fontSize: 8, color: "#8aa396", marginTop: 10, textAlign: "right", fontFamily: "monospace" }}>2 / 4</div>
                   </div>
                 </div>
-                <div style={{ padding: "14px 16px", borderTop: "1px solid #dde8e2" }}>
-                  <div style={{ fontSize: 14, fontWeight: 500, color: "#0c1510", marginBottom: 3, fontFamily: "sans-serif" }}>{t.name}</div>
-                  <div style={{ fontSize: 12, color: "#556b5e", fontFamily: "sans-serif" }}>{t.desc}</div>
+                <div style={{ padding: "0 4px" }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
+                    <div style={{ fontSize: 14, fontWeight: 500, color: "#0c1510", fontFamily: "sans-serif" }}>Mörk premium</div>
+                    <span style={{ background: "#e0f5ee", color: "#0d6e52", fontSize: 10, padding: "2px 8px", borderRadius: 20, fontWeight: 500 }}>Populär</span>
+                  </div>
+                  <div style={{ fontSize: 13, color: "#556b5e", fontFamily: "sans-serif", fontWeight: 300, lineHeight: 1.5 }}>Professionell och auktoritativ. Passar investmentbolag, PE-firmor och IR-byråer som vill kommunicera styrka.</div>
                 </div>
               </div>
-            ))}
+
+              {/* Template 2 – Ljus klassisk */}
+              <div style={{ width: 340, flexShrink: 0 }}>
+                <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #dde8e2", marginBottom: 16 }}>
+                  <div style={{ background: "#fff", padding: "28px 24px 20px" }}>
+                    <div style={{ height: 3, width: 36, background: "#1a9e74", borderRadius: 2, marginBottom: 20 }} />
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
+                      <div>
+                        <div style={{ fontSize: 26, fontWeight: 300, color: "#0c1510", letterSpacing: -0.8, lineHeight: 1.1, fontFamily: "Georgia, serif" }}>Kvartals-<br /><em style={{ color: "#1a9e74" }}>rapport Q2</em></div>
+                        <div style={{ fontSize: 10, color: "#8aa396", marginTop: 6, fontFamily: "monospace" }}>Bergström Kapital AB · 2025</div>
+                      </div>
+                      <div style={{ width: 36, height: 36, background: "#1a9e74", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 600, color: "#fff", fontFamily: "monospace" }}>BK</div>
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 14 }}>
+                      {[["Nettoomsättning", "84,2M", "+12,4%"], ["EBITDA", "18,6M", "+8,1%"], ["Rörelsemarginal", "22,1%", "-0,8pp"], ["Kassaflöde", "11,3M", "+3,2%"]].map(([l, v, c], i) => (
+                        <div key={i} style={{ background: "#f5f7f5", border: "1px solid #dde8e2", borderRadius: 6, padding: "8px 10px" }}>
+                          <div style={{ fontSize: 8, color: "#8aa396", fontFamily: "monospace", textTransform: "uppercase", marginBottom: 3 }}>{l}</div>
+                          <div style={{ fontSize: 14, fontWeight: 500, color: "#0c1510" }}>{v}</div>
+                          <div style={{ fontSize: 9, color: i === 2 ? "#c0392b" : "#1a9e74", fontFamily: "monospace", marginTop: 1 }}>{c}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 50, background: "#f5f7f5", borderRadius: 6, padding: 6 }}>
+                      {[45, 56, 48, 62, 70, 85].map((h, i) => (
+                        <div key={i} style={{ flex: 1, height: `${h}%`, borderRadius: "2px 2px 0 0", background: i >= 4 ? "#1a9e74" : "#c0dd97" }} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div style={{ padding: "0 4px" }}>
+                  <div style={{ fontSize: 14, fontWeight: 500, color: "#0c1510", fontFamily: "sans-serif", marginBottom: 4 }}>Ljus klassisk</div>
+                  <div style={{ fontSize: 13, color: "#556b5e", fontFamily: "sans-serif", fontWeight: 300, lineHeight: 1.5 }}>Ren, lättläst och universell. Passar de flesta bolag och rapporttyper. Enkel att anpassa för alla klienter.</div>
+                </div>
+              </div>
+
+              {/* Template 3 – Djärv grön */}
+              <div style={{ width: 340, flexShrink: 0 }}>
+                <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #dde8e2", marginBottom: 16 }}>
+                  <div style={{ background: "#1a9e74", padding: "28px 24px 20px", minHeight: 200, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                    <div style={{ display: "inline-block", background: "rgba(255,255,255,.15)", color: "rgba(255,255,255,.9)", fontSize: 9, padding: "4px 10px", borderRadius: 20, fontFamily: "monospace", letterSpacing: .5, border: "1px solid rgba(255,255,255,.2)" }}>DELÅRSRAPPORT · 2025</div>
+                    <div>
+                      <div style={{ fontSize: 28, fontWeight: 300, color: "#fff", letterSpacing: -0.8, lineHeight: 1.1, fontFamily: "Georgia, serif" }}>Bergström<br />Kapital AB</div>
+                      <div style={{ fontSize: 11, color: "rgba(255,255,255,.6)", marginTop: 6 }}>Januari – Juni 2025</div>
+                    </div>
+                  </div>
+                  <div style={{ background: "#1a3a2a", padding: "14px 24px", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+                    {[["Omsättning", "84,2M"], ["EBITDA", "18,6M"], ["Tillväxt", "+12%"]].map(([l, v], i) => (
+                      <div key={i} style={{ borderRight: i < 2 ? "1px solid rgba(255,255,255,.1)" : "none", paddingRight: i < 2 ? 10 : 0 }}>
+                        <div style={{ fontSize: 8, color: "rgba(255,255,255,.4)", fontFamily: "monospace", textTransform: "uppercase", marginBottom: 3 }}>{l}</div>
+                        <div style={{ fontSize: 14, fontWeight: 500, color: "#fff" }}>{v}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ background: "#fff", padding: "16px 24px" }}>
+                    <div style={{ fontSize: 8, color: "#1a9e74", fontFamily: "monospace", textTransform: "uppercase", letterSpacing: .5, marginBottom: 8 }}>VD har ordet</div>
+                    <div style={{ fontSize: 11, color: "#2a3d32", lineHeight: 1.6, fontFamily: "Georgia, serif", fontWeight: 300, fontStyle: "italic" }}>"Vi levererar vårt starkaste kvartal hittills med tillväxt om 12,4 procent..."</div>
+                    <div style={{ marginTop: 10, paddingTop: 8, borderTop: "1px solid #dde8e2", fontSize: 10, color: "#8aa396" }}>Marcus Rydén, VD</div>
+                  </div>
+                </div>
+                <div style={{ padding: "0 4px" }}>
+                  <div style={{ fontSize: 14, fontWeight: 500, color: "#0c1510", fontFamily: "sans-serif", marginBottom: 4 }}>Djärv grön</div>
+                  <div style={{ fontSize: 13, color: "#556b5e", fontFamily: "sans-serif", fontWeight: 300, lineHeight: 1.5 }}>Stark och igenkänningsbar. Bygger varumärke med varje rapport. Passar bolag som vill sticka ut.</div>
+                </div>
+              </div>
+
+              {/* Template 4 – Minimalistisk */}
+              <div style={{ width: 340, flexShrink: 0 }}>
+                <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #dde8e2", marginBottom: 16 }}>
+                  <div style={{ background: "#fafafa", padding: "28px 24px 20px", borderTop: "4px solid #0c1510" }}>
+                    <div style={{ fontSize: 10, color: "#8aa396", fontFamily: "monospace", textTransform: "uppercase", letterSpacing: .8, marginBottom: 12 }}>Bergström Kapital AB · Q2 2025</div>
+                    <div style={{ fontSize: 30, fontWeight: 300, color: "#0c1510", letterSpacing: -1, lineHeight: 1.1, marginBottom: 20, fontFamily: "Georgia, serif" }}>Delårs-<br />rapport</div>
+                    <div style={{ height: 1, background: "#dde8e2", marginBottom: 14 }} />
+                    {[["Nettoomsättning", "84 247 TSEK", true], ["EBITDA", "18 621 TSEK", true], ["Rörelsemarginal", "22,1%", false], ["Tillväxt YoY", "+12,4%", true], ["Kassaflöde", "11 340 TSEK", true]].map(([l, v, pos], i) => (
+                      <div key={i} style={{ display: "flex", justifyContent: "space-between", fontSize: 11, fontFamily: "monospace", marginBottom: 6, paddingBottom: 6, borderBottom: i < 4 ? "1px solid #f0f0f0" : "none" }}>
+                        <span style={{ color: "#8aa396" }}>{l}</span>
+                        <span style={{ color: i === 2 ? "#0c1510" : pos ? "#1a9e74" : "#c0392b", fontWeight: 500 }}>{v}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ padding: "0 4px" }}>
+                  <div style={{ fontSize: 14, fontWeight: 500, color: "#0c1510", fontFamily: "sans-serif", marginBottom: 4 }}>Minimalistisk</div>
+                  <div style={{ fontSize: 13, color: "#556b5e", fontFamily: "sans-serif", fontWeight: 300, lineHeight: 1.5 }}>Typografi och whitespace i fokus. Elegant och tidlös. Passar bolag som värdesätter enkelhet och precision.</div>
+                </div>
+              </div>
+
+              {/* Template 5 – Årsredovisning */}
+              <div style={{ width: 340, flexShrink: 0 }}>
+                <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #dde8e2", marginBottom: 16 }}>
+                  <div style={{ background: "#0c1510", padding: "28px 24px 20px", minHeight: 220, display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative", overflow: "hidden" }}>
+                    <div style={{ position: "absolute", right: -40, bottom: -40, width: 180, height: 180, borderRadius: "50%", border: "1px solid rgba(255,255,255,.05)" }} />
+                    <div style={{ position: "absolute", right: -20, bottom: -20, width: 120, height: 120, borderRadius: "50%", border: "1px solid rgba(255,255,255,.04)" }} />
+                    <div style={{ fontSize: 9, color: "#5dcaa5", fontFamily: "monospace", textTransform: "uppercase", letterSpacing: .7 }}>Årsredovisning</div>
+                    <div>
+                      <div style={{ fontSize: 26, fontWeight: 300, color: "#fff", lineHeight: 1.1, letterSpacing: -0.8, fontFamily: "Georgia, serif" }}>Bergström<br />Kapital AB<br /><span style={{ fontSize: 40, color: "rgba(255,255,255,.08)", letterSpacing: -2 }}>2024</span></div>
+                    </div>
+                  </div>
+                  <div style={{ background: "#fff", padding: "16px 24px", display: "flex", gap: 16 }}>
+                    {[["Omsättning", "312M"], ["EBITDA", "68M"], ["Tillväxt", "+14%"]].map(([l, v], i) => (
+                      <div key={i} style={{ flex: 1, borderRight: i < 2 ? "1px solid #dde8e2" : "none", paddingRight: i < 2 ? 16 : 0 }}>
+                        <div style={{ fontSize: 8, color: "#8aa396", fontFamily: "monospace", textTransform: "uppercase", marginBottom: 3 }}>{l}</div>
+                        <div style={{ fontSize: 14, fontWeight: 500, color: "#0c1510" }}>{v}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ background: "#f5f7f5", padding: "12px 24px", borderTop: "1px solid #dde8e2" }}>
+                    <div style={{ fontSize: 9, color: "#8aa396", fontFamily: "monospace", marginBottom: 6 }}>INNEHÅLL</div>
+                    {["VD-ord och strategi", "Förvaltningsberättelse", "Finansiella rapporter", "Noter och revisionsberättelse"].map((item, i) => (
+                      <div key={i} style={{ fontSize: 10, color: "#556b5e", fontFamily: "sans-serif", padding: "3px 0", borderBottom: "1px solid #ebebeb", display: "flex", justifyContent: "space-between" }}>
+                        <span>{item}</span>
+                        <span style={{ color: "#c5d9d0", fontFamily: "monospace" }}>{(i + 1) * 8}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ padding: "0 4px" }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
+                    <div style={{ fontSize: 14, fontWeight: 500, color: "#0c1510", fontFamily: "sans-serif" }}>Årsredovisning</div>
+                    <span style={{ background: "#e8f0fb", color: "#2563a8", fontSize: 10, padding: "2px 8px", borderRadius: 20, fontWeight: 500 }}>Nyhet</span>
+                  </div>
+                  <div style={{ fontSize: 13, color: "#556b5e", fontFamily: "sans-serif", fontWeight: 300, lineHeight: 1.5 }}>Komplett mall med VD-ord, förvaltningsberättelse, finansiella rapporter och noter. Inkl. ESEF-export.</div>
+                </div>
+              </div>
+
+              {/* Template 6 – IR-rapport */}
+              <div style={{ width: 340, flexShrink: 0 }}>
+                <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #dde8e2", marginBottom: 16 }}>
+                  <div style={{ background: "#fff", padding: "20px 24px 16px", borderBottom: "1px solid #dde8e2" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: "#0c1510", fontFamily: "Georgia, serif" }}>IR-rapport Q2 2025</div>
+                      <div style={{ width: 24, height: 24, background: "#1a9e74", borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 8, fontWeight: 600, color: "#fff", fontFamily: "monospace" }}>BK</div>
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 12 }}>
+                      {[["Aktiekurs", "142,50 SEK", "+3,2%", true], ["Market cap", "2,1 Mdr", "+8,4%", true], ["P/E-tal", "18,4x", "-1,2x", false], ["Direktavkastning", "2,8%", "+0,3pp", true]].map(([l, v, c, pos], i) => (
+                        <div key={i} style={{ background: "#f5f7f5", borderRadius: 6, padding: "8px 10px", border: "1px solid #dde8e2" }}>
+                          <div style={{ fontSize: 8, color: "#8aa396", fontFamily: "monospace", textTransform: "uppercase", marginBottom: 2 }}>{l}</div>
+                          <div style={{ fontSize: 13, fontWeight: 500, color: "#0c1510" }}>{v}</div>
+                          <div style={{ fontSize: 9, color: pos ? "#1a9e74" : "#c0392b", fontFamily: "monospace", marginTop: 1 }}>{c}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "flex-end", gap: 2, height: 44, background: "#f5f7f5", borderRadius: 6, padding: 5 }}>
+                      {[42, 55, 48, 62, 58, 70, 65, 78, 72, 85].map((h, i) => (
+                        <div key={i} style={{ flex: 1, height: `${h}%`, borderRadius: "1px 1px 0 0", background: i === 9 ? "#1a9e74" : i > 6 ? "#5dcaa5" : "#c0dd97" }} />
+                      ))}
+                    </div>
+                    <div style={{ fontSize: 8, color: "#8aa396", fontFamily: "monospace", marginTop: 4 }}>Aktiekursutveckling 10 dagar</div>
+                  </div>
+                  <div style={{ padding: "12px 24px", background: "#f5f7f5" }}>
+                    <div style={{ fontSize: 9, color: "#8aa396", fontFamily: "monospace", textTransform: "uppercase", marginBottom: 6 }}>Kommande IR-händelser</div>
+                    {[["18 jul", "Q2-rapport publiceras"], ["22 aug", "Kapitalmarknadsdag"], ["17 okt", "Q3-rapport publiceras"]].map(([d, e], i) => (
+                      <div key={i} style={{ display: "flex", gap: 10, fontSize: 10, color: "#556b5e", fontFamily: "sans-serif", marginBottom: 4 }}>
+                        <span style={{ color: "#1a9e74", fontFamily: "monospace", flexShrink: 0 }}>{d}</span>
+                        <span>{e}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ padding: "0 4px" }}>
+                  <div style={{ fontSize: 14, fontWeight: 500, color: "#0c1510", fontFamily: "sans-serif", marginBottom: 4 }}>IR-rapport</div>
+                  <div style={{ fontSize: 13, color: "#556b5e", fontFamily: "sans-serif", fontWeight: 300, lineHeight: 1.5 }}>Investerarrelationer och kapitalmarknadskommunikation. Aktiekurs, nyckeltal, IR-kalender och guidning.</div>
+                </div>
+              </div>
+
+            </div>
           </div>
+
+          {/* Customization section */}
+          <div style={{ padding: "64px 48px 0", maxWidth: 1100, margin: "0 auto" }}>
+            <div style={{ background: "#0c1510", borderRadius: 24, padding: "48px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
+              <div>
+                <div style={{ fontSize: 11, fontWeight: 500, color: "#5dcaa5", textTransform: "uppercase", letterSpacing: 1, fontFamily: "monospace", marginBottom: 12 }}>Anpassning</div>
+                <h3 style={{ fontSize: 28, fontWeight: 300, color: "#fff", letterSpacing: -0.8, lineHeight: 1.2, marginBottom: 16, fontFamily: "Georgia, serif" }}>Gör den till din.<br /><em style={{ color: "#5dcaa5" }}>På minuter.</em></h3>
+                <p style={{ fontSize: 14, color: "rgba(255,255,255,.5)", lineHeight: 1.8, fontFamily: "sans-serif", fontWeight: 300, marginBottom: 28 }}>Varje mall är en startpunkt, inte en begränsning. Lägg till klientens logga, byt färger, ladda upp bilder och mönster – allt med drag and drop. Ingen designkompetens krävs.</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                  {[
+                    { title: "Ladda upp loggor", desc: "Stöder PNG, SVG och PDF. Loggan sitter på rätt plats på varje sida automatiskt." },
+                    { title: "Egna färgpalett", desc: "Ange hex-kod eller använd colour picker. Alla element uppdateras direkt." },
+                    { title: "Bilder och mönster", desc: "Dra och släpp bilder direkt in i rapporten. Bakgrundsmönster och texturer finns inbyggda." },
+                    { title: "Typografi", desc: "Välj bland 40+ typsnitt eller ladda upp egna. Storlekar och hierarki justeras automatiskt." },
+                  ].map((f, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                      <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#1a9e74", marginTop: 6, flexShrink: 0 }} />
+                      <div>
+                        <div style={{ fontSize: 13, fontWeight: 500, color: "#fff", fontFamily: "sans-serif", marginBottom: 2 }}>{f.title}</div>
+                        <div style={{ fontSize: 12, color: "rgba(255,255,255,.45)", fontFamily: "sans-serif", fontWeight: 300, lineHeight: 1.5 }}>{f.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Drag and drop illustration */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                {/* Drag handle illustration */}
+                <div style={{ background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 12, padding: 16, display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 3, flexShrink: 0 }}>
+                    {[0,1,2].map(i => <div key={i} style={{ display: "flex", gap: 3 }}>{[0,1].map(j => <div key={j} style={{ width: 3, height: 3, borderRadius: "50%", background: "rgba(255,255,255,.3)" }} />)}</div>)}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ height: 8, background: "rgba(255,255,255,.15)", borderRadius: 4, marginBottom: 5, width: "70%" }} />
+                    <div style={{ height: 6, background: "rgba(255,255,255,.08)", borderRadius: 3, width: "50%" }} />
+                  </div>
+                  <div style={{ fontSize: 10, color: "rgba(255,255,255,.3)", fontFamily: "monospace" }}>Dra ↕</div>
+                </div>
+                <div style={{ background: "rgba(26,158,116,.15)", border: "2px dashed rgba(26,158,116,.4)", borderRadius: 12, padding: 16, textAlign: "center" }}>
+                  <div style={{ fontSize: 11, color: "#5dcaa5", fontFamily: "sans-serif", marginBottom: 4 }}>Släpp här</div>
+                  <div style={{ fontSize: 10, color: "rgba(255,255,255,.3)", fontFamily: "monospace" }}>eller klicka för att ladda upp</div>
+                </div>
+                <div style={{ background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 12, padding: 16, display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 3, flexShrink: 0 }}>
+                    {[0,1,2].map(i => <div key={i} style={{ display: "flex", gap: 3 }}>{[0,1].map(j => <div key={j} style={{ width: 3, height: 3, borderRadius: "50%", background: "rgba(255,255,255,.3)" }} />)}</div>)}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ height: 8, background: "rgba(255,255,255,.15)", borderRadius: 4, marginBottom: 5, width: "85%" }} />
+                    <div style={{ height: 6, background: "rgba(255,255,255,.08)", borderRadius: 3, width: "60%" }} />
+                  </div>
+                  <div style={{ fontSize: 10, color: "rgba(255,255,255,.3)", fontFamily: "monospace" }}>Dra ↕</div>
+                </div>
+                {/* Color picker illustration */}
+                <div style={{ background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 12, padding: 16 }}>
+                  <div style={{ fontSize: 10, color: "rgba(255,255,255,.4)", fontFamily: "monospace", marginBottom: 10, textTransform: "uppercase" }}>Varumärkesfärger</div>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    {["#1a9e74", "#0c1510", "#5dcaa5", "#e0f5ee", "#fff"].map((c, i) => (
+                      <div key={i} style={{ width: 28, height: 28, borderRadius: "50%", background: c, border: i === 0 ? "2px solid #5dcaa5" : "1px solid rgba(255,255,255,.1)", cursor: "pointer" }} />
+                    ))}
+                    <div style={{ width: 28, height: 28, borderRadius: "50%", background: "rgba(255,255,255,.1)", border: "1px dashed rgba(255,255,255,.3)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "rgba(255,255,255,.4)", cursor: "pointer" }}>+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </section>
+
 
                 {/* PRISER */}
         <section id="priser" style={{ padding: "80px 48px", maxWidth: 1100, margin: "0 auto" }}>
